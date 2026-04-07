@@ -1,76 +1,181 @@
-/* --- RESET & GLOBAL --- */
+/* --- COUSIN CREW HUB: ELITE SYNTHETIC V2 ---
+   Developed by Timon | © 2026
+*/
+
+:root {
+    --primary-cyan: #00d4ff;
+    --whatsapp-green: #25d366;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --bg-dark: #050505;
+}
+
 * {
-    margin: 0; padding: 0; box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, sans-serif;
     user-select: none;
     -webkit-user-select: none;
 }
 
 body {
-    background: #050505;
-    background: radial-gradient(circle at top, #0a1128 0%, #050505 100%);
+    background: var(--bg-dark);
     color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
     padding: 40px 20px;
+    overflow-x: hidden;
 }
 
-.profile-section { text-align: center; margin-bottom: 30px; }
+/* --- DYNAMIC BACKGROUND GLOW --- */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: 
+        radial-gradient(circle at 15% 20%, rgba(0, 212, 255, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 85% 80%, rgba(37, 211, 102, 0.05) 0%, transparent 40%);
+    z-index: -1;
+    filter: blur(60px);
+    animation: pulseGlow 8s infinite alternate ease-in-out;
+}
+
+@keyframes pulseGlow {
+    0% { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(1.2); opacity: 1; }
+}
+
+/* --- HEADER & PROFILE --- */
+.profile-section {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: fadeInDown 0.8s ease;
+}
+
 .profile-pic {
-    width: 90px; height: 90px; background: #111;
-    border-radius: 50%; margin: 0 auto 15px;
-    border: 2px solid #00d4ff;
-    box-shadow: 0 0 25px rgba(0, 212, 255, 0.4);
+    width: 100px;
+    height: 100px;
+    background: #111;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    border: 2px solid var(--primary-cyan);
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+    position: relative;
+    overflow: hidden;
 }
 
-h2 { font-size: 1.2rem; letter-spacing: 2px; font-weight: 800; }
-.sub-head { font-size: 0.85rem; color: #666; margin-top: 5px; }
+/* Shimmer Effect on Profile Pic */
+.profile-pic::after {
+    content: "";
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.15), transparent);
+    transform: rotate(45deg);
+    animation: shimmer 4s infinite linear;
+}
 
-.links-container { width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 12px; }
+h2 {
+    font-size: 1.4rem;
+    letter-spacing: 3px;
+    font-weight: 800;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(255,255,255,0.2);
+}
 
-/* --- CARD STYLES --- */
+.sub-head {
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 8px;
+    font-weight: 600;
+}
+
+/* --- CARDS & LINKS --- */
+.links-container {
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
 .link-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(15px);
-    padding: 18px; border-radius: 16px;
-    text-align: center; text-decoration: none; color: white;
-    font-weight: 700; cursor: pointer; transition: 0.3s;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    padding: 22px;
+    border-radius: 20px;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-.link-card:active:not(.crew-box) { transform: scale(0.96); background: rgba(255, 255, 255, 0.1); }
-.highlight-whatsapp { border-color: #25d366; color: #25d366; }
-.chat-trigger { border-color: #00d4ff; color: #00d4ff; }
-
-/* --- CREW REGISTRY SPECIAL CARD --- */
-.crew-box { cursor: default; text-align: left; background: rgba(255, 255, 255, 0.02); }
-.registry-title { font-size: 0.7rem; letter-spacing: 3px; margin-bottom: 15px; color: #00d4ff; text-align: center; font-weight: 800; }
-.crew-grid { display: flex; flex-direction: column; gap: 10px; }
-.crew-item { display: flex; justify-content: space-between; font-size: 0.85rem; padding-bottom: 6px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
-.crew-item b { color: #eee; }
-.crew-item span { color: #555; font-size: 0.7rem; text-transform: uppercase; font-weight: 900; }
-
-/* --- CHAT POPUP --- */
-.chat-popup {
-    position: fixed; bottom: -600px; right: 20px;
-    width: calc(100% - 40px); max-width: 360px; height: 480px;
-    background: #0a0a0a; border: 1px solid #222; border-radius: 24px;
-    display: flex; flex-direction: column; transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-    z-index: 9999; box-shadow: 0 20px 60px rgba(0,0,0,0.9);
+.link-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
 }
-.chat-popup.active { bottom: 20px; }
-.chat-header { padding: 18px; background: #111; display: flex; align-items: center; justify-content: space-between; border-radius: 24px 24px 0 0; }
-.status-dot { width: 8px; height: 8px; background: #00ff88; border-radius: 50%; display: inline-block; margin-right: 8px; box-shadow: 0 0 10px #00ff88; }
-.chat-window { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background: #070707; user-select: text; }
-.msg { padding: 12px 16px; border-radius: 18px; font-size: 0.88rem; max-width: 85%; }
-.msg b { display: block; font-size: 0.65rem; color: #00d4ff; margin-bottom: 4px; text-transform: uppercase; }
-.msg.others { background: #1a1a1a; align-self: flex-start; border-bottom-left-radius: 4px; }
-.msg.me { background: #00d4ff; color: black; align-self: flex-end; font-weight: 600; border-bottom-right-radius: 4px; }
-.chat-input-area { padding: 15px; display: flex; gap: 10px; background: #0a0a0a; border-radius: 0 0 24px 24px; }
-.chat-input-area input { background: #000; border: 1px solid #222; color: white; padding: 12px; border-radius: 12px; outline: none; user-select: text; flex: 1; }
-#send-btn { background: #00d4ff; border: none; padding: 0 18px; border-radius: 12px; cursor: pointer; font-weight: 800; color: black; }
-.close-btn { background: none; border: none; color: #444; font-size: 1.5rem; cursor: pointer; }
 
-footer { margin-top: auto; padding: 30px 0; color: #333; font-size: 0.7rem; text-align: center; }
+.link-card:active:not(.crew-box) {
+    transform: scale(0.95);
+}
+
+.highlight-whatsapp {
+    border-color: rgba(37, 211, 102, 0.3);
+    color: var(--whatsapp-green);
+}
+
+.chat-trigger {
+    border-color: rgba(0, 212, 255, 0.3);
+    color: var(--primary-cyan);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.1);
+}
+
+/* --- CREW REGISTRY --- */
+.crew-box {
+    cursor: default;
+    text-align: left;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.registry-title {
+    font-size: 0.7rem;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+    color: var(--primary-cyan);
+    text-align: center;
+    font-weight: 900;
+    opacity: 0.8;
+}
+
+.crew-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.crew-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.crew-item b { color: #fff; font-weight: 600; }
+.crew-item span { 
+    color: #666; 
+    font-size: 0.65rem; 
+    text-transform: uppercase; 
+    font-weight: 800;
+    background: rgba(255,2
