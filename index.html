@@ -14,7 +14,7 @@
         }
     </script>
 
-    <link rel="stylesheet" href="style.css?v=2.0">
+    <link rel="stylesheet" href="style.css?v=3.0">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -38,19 +38,26 @@
         </div>
 
         <a href="https://whatsapp.com/channel/0029Vb7QkV14dTnBkzndP63f" class="link-card highlight-whatsapp" target="_blank">
-            <span>📢 JOIN THE WHATSAPP CHANNEL</span>
+            <span>📢 JOIN WHATSAPP CHANNEL</span>
         </a>
-
-        <div class="link-card chat-trigger" onclick="toggleChat()">
-            <span>💬 LIVE CREW CHAT (GLOBAL)</span>
-        </div>
 
         <a href="https://www.instagram.com/vetruk_x" class="link-card" target="_blank">
             <span>📸 FOLLOW @VETRUK_X</span>
         </a>
+    </div>
 
-        <a href="tel:+254797989297" class="link-card">
-            <span>📞 CONTACT DEVELOPER: 0797989297</span>
+    <div class="taskbar">
+        <div class="task-icon" onclick="window.location.href='tel:+254797989297'">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/phone.png" alt="Call">
+        </div>
+        
+        <div class="task-icon main-btn" onclick="toggleChat()">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/chat-messages--v1.png" alt="Chat">
+            <span class="notification-dot"></span>
+        </div>
+
+        <a href="https://www.instagram.com/vetruk_x" class="task-icon" target="_blank">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="IG">
         </a>
     </div>
 
@@ -61,7 +68,7 @@
         </div>
         <div id="chat-window" class="chat-window"></div>
         <div class="chat-input-area">
-            <input type="text" id="user-name" placeholder="Nickname" maxlength="12">
+            <input type="text" id="user-name" placeholder="Name" maxlength="12">
             <input type="text" id="user-msg" placeholder="Message..." maxlength="100">
             <button id="send-btn">➤</button>
         </div>
@@ -69,7 +76,7 @@
 
     <footer>
         <p>© 2026 Cousin Crew Hub. All Rights Reserved.</p>
-        <p style="font-size: 0.6rem; margin-top: 5px; opacity: 0.4;">System Developed by Timon</p>
+        <p style="font-size: 0.6rem; margin-top: 5px; opacity: 0.3;">System Architect: Timon</p>
     </footer>
 
     <script type="module">
