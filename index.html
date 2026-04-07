@@ -7,14 +7,12 @@
     <script>
         document.addEventListener('contextmenu', event => event.preventDefault());
         document.onkeydown = function(e) {
-            if(e.keyCode == 123) return false; // Disable F12
+            if(e.keyCode == 123) return false;
             if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
-            if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false;
-            if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
             if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
         }
     </script>
-    <link rel="stylesheet" href="style.css?v=1.3">
+    <link rel="stylesheet" href="style.css?v=1.5">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -22,12 +20,12 @@
     <div class="profile-section">
         <div class="profile-pic"></div>
         <h2>STREET HUMOR HUB</h2>
-        <p class="sub-head">Official Portfolio & Community 🇰🇪</p>
+        <p class="sub-head">Official Community & Dev Portfolio 🇰🇪</p>
     </div>
 
     <div class="links-container">
         <a href="https://whatsapp.com/channel/0029Vb7QkV14dTnBkzndP63f" class="link-card highlight-whatsapp" target="_blank">
-            <span>📢 JOIN THE OFFICIAL CHANNEL</span>
+            <span>📢 JOIN THE WHATSAPP CHANNEL</span>
         </a>
 
         <a href="https://www.instagram.com/vetruk_x" class="link-card" target="_blank">
@@ -35,11 +33,11 @@
         </a>
 
         <div class="link-card chat-trigger" onclick="toggleChat()">
-            <span>💬 LIVE COMMUNITY CHAT</span>
+            <span>💬 LIVE GLOBAL CHAT</span>
         </div>
 
         <a href="tel:+254797989297" class="link-card">
-            <span>📞 HIRE TIMON: 0797989297</span>
+            <span>📞 CONTACT TIMON: 0797989297</span>
         </a>
     </div>
 
@@ -58,18 +56,23 @@
 
     <footer>
         <p>© 2026 Street Humor Hub. All Rights Reserved.</p>
-        <p style="font-size: 0.6rem; margin-top: 5px; opacity: 0.5;">Developed & Protected by Timon</p>
+        <p style="font-size: 0.6rem; margin-top: 5px; opacity: 0.4;">System Developed by Timon</p>
     </footer>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getDatabase, ref, push, onChildAdded, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
+        // CONFIG UPDATED WITH YOUR DETAILS
         const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            databaseURL: "YOUR_DATABASE_URL",
-            projectId: "YOUR_PROJECT_ID",
-            appId: "YOUR_APP_ID"
+            apiKey: "AIzaSyCXArPj4WErtRkb2qfaDueaWZm9tdAbSGI",
+            authDomain: "street-humor-hub.firebaseapp.com",
+            projectId: "street-humor-hub",
+            storageBucket: "street-humor-hub.firebasestorage.app",
+            messagingSenderId: "1010209458338",
+            appId: "1:1010209458338:web:548911c5d0e36d1e3ceffb",
+            measurementId: "G-BSBR2JDXC5",
+            databaseURL: "https://street-humor-hub-default-rtdb.firebaseio.com"
         };
 
         const app = initializeApp(firebaseConfig);
@@ -86,27 +89,4 @@
         const chatWindow = document.getElementById("chat-window");
 
         sendBtn.onclick = () => {
-            const name = uName.value.trim().replace(/<[^>]*>?/gm, ''); // Basic XSS Protection
-            const text = uMsg.value.trim().replace(/<[^>]*>?/gm, ''); 
-            
-            if (text !== "") {
-                push(chatRef, {
-                    name: name || "Guest",
-                    text: text,
-                    time: serverTimestamp()
-                });
-                uMsg.value = "";
-            }
-        };
-
-        onChildAdded(chatRef, (snapshot) => {
-            const data = snapshot.val();
-            const msgDiv = document.createElement("div");
-            msgDiv.className = `msg ${data.name === uName.value ? 'me' : 'others'}`;
-            msgDiv.innerHTML = `<b>${data.name}</b> ${data.text}`;
-            chatWindow.appendChild(msgDiv);
-            chatWindow.scrollTop = chatWindow.scrollHeight;
-        });
-    </script>
-</body>
-</html>
+            const name = uName.value.trim() ||
